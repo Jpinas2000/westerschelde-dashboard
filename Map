@@ -1,0 +1,22 @@
+westerschelde-dashboard/
+│
+├── app.py
+├── config.py
+├── requirements.txt
+├── README.md
+│
+├── modules/
+│   ├── __init__.py
+│   ├── weather.py
+│   └── water.py
+│
+├── templates/
+│   └── index.html
+│
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── dashboard.js
+│
+└── data/
