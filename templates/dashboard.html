@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>{{ title }}</title>
+
+<link rel="stylesheet"
+
+href="{{ url_for('static',filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<h1>{{ title }}</h1>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Temperatuur</h2>
+
+<p>{{ weather.temperature }} °C</p>
+
+</div>
+
+<div class="card">
+
+<h2>Wind</h2>
+
+<p>{{ weather.wind }} km/u</p>
+
+</div>
+
+<div class="card">
+
+<h2>Waterstand</h2>
+
+<p>{{ water.waterlevel }}</p>
+
+</div>
+
+<div class="card">
+
+<h2>Getij</h2>
+
+<p>HW {{ water.high }}</p>
+
+<p>LW {{ water.low }}</p>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static',filename='js/dashboard.js') }}"></script>
+
+</body>
+
+</html>
