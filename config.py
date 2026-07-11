@@ -1,8 +1,9 @@
 TITLE = "Westerschelde Dashboard"
 
-REFRESH_SECONDS = 60
+LOCATION = "Vlissingen"
 
 LATITUDE = 51.442
+
 LONGITUDE = 3.573
 
-LOCATION = "Vlissingen"
+REFRESH = 60
