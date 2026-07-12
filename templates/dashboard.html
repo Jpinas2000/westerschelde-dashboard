@@ -39,19 +39,15 @@ href="{{ url_for('static',filename='css/style.css') }}">
 </div>
 <div class="card">
 
-<h2>Waterstand</h2>
+    <h2>🌊 Water Vlissingen</h2>
 
-<p>{{ water.waterlevel }}</p>
+    <p><strong>Waterstand:</strong> {{ water.waterlevel }}</p>
 
-</div>
+    <p><strong>Hoogwater:</strong> {{ water.high }}</p>
 
-<div class="card">
+    <p><strong>Laagwater:</strong> {{ water.low }}</p>
 
-<h2>Getij</h2>
-
-<p>HW {{ water.high }}</p>
-
-<p>LW {{ water.low }}</p>
+    <p><strong>Laatste update:</strong> {{ water.update }}</p>
 
 </div>
 
