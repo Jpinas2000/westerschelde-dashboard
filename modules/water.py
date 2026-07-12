@@ -1,47 +1,68 @@
 import requests
+from datetime import datetime, timedelta
+
+URL = "https://waterwebservices.rijkswaterstaat.nl/ONLINEWAARNEMINGENSERVICES_DBO/OphalenLaatsteWaarnemingen"
 
 
 def get_water():
 
+    eind = datetime.utcnow()
+    begin = eind - timedelta(hours=1)
+
+    body = {
+        "LocatieLijst": [
+            {
+                "Code": "VLIS",
+                "X": 541518.7459,
+                "Y": 5699254.9643
+            }
+        ],
+        "AquoPlusWaarnemingMetadataLijst": [
+            {
+                "AquoMetadata": {
+                    "Compartiment": {
+                        "Code": "OW"
+                    },
+                    "Grootheid": {
+                        "Code": "WATHTE"
+                    }
+                }
+            }
+        ]
+    }
+
     try:
 
-        url = (
-            "https://waterwebservices.rijkswaterstaat.nl/"
-            "METADATASERVICES/OphalenMeetlocaties/"
+        response = requests.post(URL, json=body, timeout=15)
+
+        data = response.json()
+
+        waarde = (
+            data["WaarnemingenLijst"][0]
+            ["MetingenLijst"][0]
+            ["Meetwaarde"]["Waarde_Numeriek"]
         )
 
-        response = requests.get(url, timeout=10)
-
-        # tijdelijke testcontrole
-        if response.status_code != 200:
-            raise Exception("Rijkswaterstaat niet bereikbaar")
-
+        tijd = (
+            data["WaarnemingenLijst"][0]
+            ["MetingenLijst"][0]
+            ["Tijdstip"]
+        )
 
         return {
-
-            "waterlevel": "live koppeling actief",
-
-            "location": "Vlissingen",
-
-            "high": "-",
-
-            "low": "-"
-
+            "waterlevel": f"{waarde:.2f} m NAP",
+            "high": "--:--",
+            "low": "--:--",
+            "update": tijd
         }
 
+    except Exception as fout:
 
-    except Exception as e:
-
-        print("Waterdata fout:", e)
+        print(fout)
 
         return {
-
-            "waterlevel": "-",
-
-            "location": "Vlissingen",
-
-            "high": "-",
-
-            "low": "-"
-
+            "waterlevel": "--",
+            "high": "--",
+            "low": "--",
+            "update": "--"
         }
